@@ -9,5 +9,6 @@ app.get('/:id', Posts.fetchPostById);
 app.get('/:id/comments', Posts.fetchComments);
 app.post('/', Validator.validatePost, Posts.createPost);
 app.post('/:id/comments', Validator.validateComment, Posts.addComment);
+app.delete('/:id', Posts.removePost);
 
 module.exports = app;
