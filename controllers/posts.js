@@ -35,6 +35,7 @@ const postsController = {
     .then( data => {
       if( data.length > 0) {
         res.status(200).json(data);
+        return;
       }
       res.status(404).json({
         message: 'The post with the specified ID does not exist.',
@@ -57,6 +58,27 @@ const postsController = {
     .catch( err => {
       res.status(500).json({
         error: 'There was an error while saving the post to the database',
+      })
+    });
+  },
+  addComment: (req, res) => {
+    const { id } = req.params;
+    Posts.insertComment({...req.body, post_id: parseInt(id, 10)})
+    .then( data => {
+      return Posts.findCommentById(data.id);
+    })
+    .then( data => {
+      res.status(201).json(data[0]);
+    })
+    .catch( err => {
+      if(err.errno === 19) {
+        res.status(404).json({
+          error: 'The post with the specified ID does not exist.',
+        });
+        return;
+      }
+      res.status(500).json({
+        error: 'There was an error while saving the comment to the database',
       })
     });
   },
