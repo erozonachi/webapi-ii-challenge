@@ -129,7 +129,7 @@ When the client makes a `POST` request to `/api/posts/:id/comments`:
 
 When the client makes a `GET` request to `/api/posts`:
 
-- If there's an error in retrieving the _posts_ from the database:
+- [x] If there's an error in retrieving the _posts_ from the database:
   - cancel the request.
   - respond with HTTP status code `500`.
   - return the following JSON object: `{ error: "The posts information could not be retrieved." }`.
