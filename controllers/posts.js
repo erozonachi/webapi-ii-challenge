@@ -61,6 +61,29 @@ const postsController = {
       })
     });
   },
+  updatePost: (req, res) => {
+    const { id } = req.params;
+    Posts.update(id, req.body)
+    .then( data => {
+      if(data === 0) {
+        res.status(404).json({
+          error: 'The post with the specified ID does not exist.'
+        });
+        return;
+      }
+      return Posts.findById(id);
+    })
+    .then( data => {
+      if(data && Array.isArray(data) && data.length > 0) {
+        res.status(200).json(data[0]);
+      }
+    })
+    .catch( err => {
+      res.status(500).json({
+        error: 'The post information could not be modified.',
+      })
+    });
+  },
   addComment: (req, res) => {
     const { id } = req.params;
     Posts.insertComment({...req.body, post_id: parseInt(id, 10)})
