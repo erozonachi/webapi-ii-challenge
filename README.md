@@ -148,12 +148,12 @@ When the client makes a `GET` request to `/api/posts/:id`:
 
 When the client makes a `GET` request to `/api/posts/:id/comments`:
 
-- If the _post_ with the specified `id` is not found:
+- [x] If the _post_ with the specified `id` is not found:
 
   - return HTTP status code `404` (Not Found).
   - return the following JSON object: `{ message: "The post with the specified ID does not exist." }`.
 
-- If there's an error in retrieving the _comments_ from the database:
+- [x] If there's an error in retrieving the _comments_ from the database:
   - cancel the request.
   - respond with HTTP status code `500`.
   - return the following JSON object: `{ error: "The comments information could not be retrieved." }`.
