@@ -46,6 +46,20 @@ const postsController = {
       })
     });
   },
+  createPost: (req, res) => {
+    Posts.insert(req.body)
+    .then( data => {
+      return Posts.findById(data.id);
+    })
+    .then( data => {
+      res.status(201).json(data[0]);
+    })
+    .catch( err => {
+      res.status(500).json({
+        error: 'There was an error while saving the post to the database',
+      })
+    });
+  },
 }
 
 module.exports = postsController;
