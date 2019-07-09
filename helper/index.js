@@ -9,6 +9,16 @@ const Validation = {
     }
     next();
   },
+  validateComment: (req, res, next) => {
+    const { text } = req.body;
+    if(!text || text.trim() === '') {
+      res.status(400).json({
+        error: 'Please provide text for the comment.'
+      });
+      return;
+    }
+    next();
+  },
 }
 
 module.exports = Validation;
